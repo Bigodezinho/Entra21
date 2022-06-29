@@ -1,0 +1,14 @@
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CadastroCaminhao\bin\Debug\netcoreapp3.1\CadastroCaminhao.exe
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CadastroCaminhao\bin\Debug\netcoreapp3.1\CadastroCaminhao.deps.json
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CadastroCaminhao\bin\Debug\netcoreapp3.1\CadastroCaminhao.runtimeconfig.json
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CadastroCaminhao\bin\Debug\netcoreapp3.1\CadastroCaminhao.runtimeconfig.dev.json
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CadastroCaminhao\bin\Debug\netcoreapp3.1\CadastroCaminhao.dll
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CadastroCaminhao\bin\Debug\netcoreapp3.1\CadastroCaminhao.pdb
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CadastroCaminhao\obj\Debug\netcoreapp3.1\CadastroCaminhao.csproj.AssemblyReference.cache
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CadastroCaminhao\obj\Debug\netcoreapp3.1\CadastroCaminhao.GeneratedMSBuildEditorConfig.editorconfig
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CadastroCaminhao\obj\Debug\netcoreapp3.1\CadastroCaminhao.AssemblyInfoInputs.cache
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CadastroCaminhao\obj\Debug\netcoreapp3.1\CadastroCaminhao.AssemblyInfo.cs
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CadastroCaminhao\obj\Debug\netcoreapp3.1\CadastroCaminhao.csproj.CoreCompileInputs.cache
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CadastroCaminhao\obj\Debug\netcoreapp3.1\CadastroCaminhao.dll
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CadastroCaminhao\obj\Debug\netcoreapp3.1\CadastroCaminhao.pdb
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CadastroCaminhao\obj\Debug\netcoreapp3.1\CadastroCaminhao.genruntimeconfig.cache
