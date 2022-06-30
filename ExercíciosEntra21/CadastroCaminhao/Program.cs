@@ -6,24 +6,9 @@ namespace CadastroCaminhao
 {
     internal class Program
     {
-        enum Operacao3
-        {
-            AtualizarCaminhao,
-            AtualizarMotorista,
-
-        }
-        enum Operaacao4
-        {
-            RemoverCaminhao,
-            RemoverMotorista,
-            RemoverViagem,
-        }
         public static List<Caminhao> LstCaminhao { get; set; } = new List<Caminhao>();
         public static List<Motorista> LstMotorista { get; set; } = new List<Motorista>();
         public static List<Viagem> LstViagem { get; set; } = new List<Viagem>();
-
-
-
 
 
         private static Caminhao ObterCaminhaoPorId(int idPEsquisar)
