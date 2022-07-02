@@ -1,0 +1,14 @@
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CrudLogistica\bin\Debug\netcoreapp3.1\CrudLogistica.exe
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CrudLogistica\bin\Debug\netcoreapp3.1\CrudLogistica.deps.json
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CrudLogistica\bin\Debug\netcoreapp3.1\CrudLogistica.runtimeconfig.json
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CrudLogistica\bin\Debug\netcoreapp3.1\CrudLogistica.runtimeconfig.dev.json
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CrudLogistica\bin\Debug\netcoreapp3.1\CrudLogistica.dll
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CrudLogistica\bin\Debug\netcoreapp3.1\CrudLogistica.pdb
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CrudLogistica\obj\Debug\netcoreapp3.1\CrudLogistica.csproj.AssemblyReference.cache
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CrudLogistica\obj\Debug\netcoreapp3.1\CrudLogistica.GeneratedMSBuildEditorConfig.editorconfig
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CrudLogistica\obj\Debug\netcoreapp3.1\CrudLogistica.AssemblyInfoInputs.cache
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CrudLogistica\obj\Debug\netcoreapp3.1\CrudLogistica.AssemblyInfo.cs
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CrudLogistica\obj\Debug\netcoreapp3.1\CrudLogistica.csproj.CoreCompileInputs.cache
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CrudLogistica\obj\Debug\netcoreapp3.1\CrudLogistica.dll
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CrudLogistica\obj\Debug\netcoreapp3.1\CrudLogistica.pdb
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\CrudLogistica\obj\Debug\netcoreapp3.1\CrudLogistica.genruntimeconfig.cache
