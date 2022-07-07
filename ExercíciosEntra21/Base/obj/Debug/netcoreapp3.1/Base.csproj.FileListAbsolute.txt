@@ -1,0 +1,14 @@
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\Base\bin\Debug\netcoreapp3.1\Base.exe
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\Base\bin\Debug\netcoreapp3.1\Base.deps.json
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\Base\bin\Debug\netcoreapp3.1\Base.runtimeconfig.json
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\Base\bin\Debug\netcoreapp3.1\Base.runtimeconfig.dev.json
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\Base\bin\Debug\netcoreapp3.1\Base.dll
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\Base\bin\Debug\netcoreapp3.1\Base.pdb
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\Base\obj\Debug\netcoreapp3.1\Base.csproj.AssemblyReference.cache
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\Base\obj\Debug\netcoreapp3.1\Base.GeneratedMSBuildEditorConfig.editorconfig
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\Base\obj\Debug\netcoreapp3.1\Base.AssemblyInfoInputs.cache
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\Base\obj\Debug\netcoreapp3.1\Base.AssemblyInfo.cs
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\Base\obj\Debug\netcoreapp3.1\Base.csproj.CoreCompileInputs.cache
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\Base\obj\Debug\netcoreapp3.1\Base.dll
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\Base\obj\Debug\netcoreapp3.1\Base.pdb
+C:\RepositórioEntra21\Entra21\ExercíciosEntra21\Base\obj\Debug\netcoreapp3.1\Base.genruntimeconfig.cache
