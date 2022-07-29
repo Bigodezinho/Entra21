@@ -1,0 +1,376 @@
+PROGRAM
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+using System.Data;
+using System.Data.SqlClient;
+
+namespace Sql
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string Nome;
+            string Cpf;
+            string Telefone;
+            string Endereco;
+            DateTime dataNascimento;
+            string Naturalidade;
+
+            Console.WriteLine("digite o nome : ");
+            Nome = Convert.ToString(Console.ReadLine());
+            Console.WriteLine("digite o cpf : ");
+            Cpf = Convert.ToString(Console.ReadLine());
+            Console.WriteLine("digite o telefone : ");
+            Telefone = Convert.ToString(Console.ReadLine());
+            Console.WriteLine("digite o endereço : ");
+            Endereco = Convert.ToString(Console.ReadLine());
+            Console.WriteLine("digite o data de nascimento : ");
+            dataNascimento = Convert.ToDateTime(Console.ReadLine());
+            Console.WriteLine("digite o naturalidade : ");
+            Naturalidade = Convert.ToString(Console.ReadLine());
+
+            CadastrarPessoa cadastrar = new CadastrarPessoa(Nome, Cpf, Telefone, Endereco, dataNascimento, Naturalidade);
+
+            CadastrarPessoa listar = new CadastrarPessoa();
+            listar.ListarPessoas();
+
+            CadastrarPessoa atualizar = new CadastrarPessoa();
+            atualizar.UpdatePessoas(Nome, Cpf, Telefone, Endereco, dataNascimento, Naturalidade);
+
+            CadastrarPessoa deletar = new CadastrarPessoa();
+            deletar.DeletePessoas();
+
+
+
+            DB_Conect conexao = new DB_Conect();
+            SqlCommand cmd = new SqlCommand();
+            String mensagem = "";
+            string connection = @"Data Source=ITELABD14\SQLEXPRESS;Initial Catalog=BancoC;Integrated Security=True";
+
+            List<Pessoa> pessoas = new List<Pessoa>();
+            try
+            {
+                SqlDataReader resultado;
+                var query = @"SELECT Id, Nome, Cpf, Telefone, Endereco, dataNascimento, Naturalidade FROM Pessoa";
+                using (var sql = new SqlConnection(connection))
+                {
+                    SqlCommand command = new SqlCommand(query, sql);
+                    command.Connection.Open();
+                    resultado = command.ExecuteReader();
+
+                    while (resultado.Read())
+                    {
+                        pessoas.Add(new Pessoa(resultado.GetString(resultado.GetString("Nome")),
+                                               resultado.GetString(resultado.GetOrdinal("Cpf")),
+                                               resultado.GetString(resultado.GetOrdinal("Telefone")),
+                                               resultado.GetString(resultado.GetOrdinal("Endereco")),
+                                               resultado.GetDateTime(resultado.GetOrdinal("dataNascimento")),
+                                               resultado.GetString(resultado.GetOrdinal("Naturalidade"))));
+                    }
+                }
+                Console.WriteLine("========Listagem========");
+                foreach (Pessoa p in pessoas)
+                {
+                    Console.WriteLine("========Inicio========");
+                    Console.WriteLine("Nome: " + p.Nome);
+                    Console.WriteLine("CPF: " + p.Cpf);
+                    Console.WriteLine("Telefone: " + p.Telefone);
+                    Console.WriteLine("Rg: " + p.Endereco);
+                    Console.WriteLine("Data de Nascimento: " + p.dataNascimento);
+                    Console.WriteLine("Naturalidade: " + p.Naturalidade);
+                    Console.WriteLine("========Fim========");
+                }
+            }
+            catch (Exception)
+            {
+                mensagem = "Erro!";
+            }
+
+
+        }
+    }
+}
+
+
+
+CLASSE PESSOA
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+using System.Data;
+using System.Data.SqlClient;
+
+namespace Sql
+{
+    public class Pessoa
+    {
+        public string Nome { get; set; }
+        public string Cpf { get; set; }
+        public string Telefone { get; set; }
+        public string Endereco { get; set; }
+        public DateTime dataNascimento { get; set; }
+        public string Naturalidade { get; set; }
+
+        public Pessoa() { }
+
+        public Pessoa(
+        string Nome,
+        string Cpf,
+        string Telefone,
+        string Endereco,
+        DateTime dataNascimento,
+        string Naturalidade)
+        {
+            this.Nome = Nome;
+            this.Cpf = Cpf;
+            this.Telefone = Telefone;
+            this.Endereco = Endereco;
+            this.dataNascimento = dataNascimento;
+            this.Naturalidade = Naturalidade;
+        }
+    }
+}
+
+CLASSE DB CONNECT
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+using System.Data;
+using System.Data.SqlClient;
+
+namespace Sql
+{
+    public class DB_Conect
+    {
+        SqlConnection con = new SqlConnection();
+        public DB_Conect()
+        {
+            //colocar o @ na frente é necessário
+            con.ConnectionString = @"Data Source=ITELABD14\SQLEXPRESS;Initial Catalog=BancoC;Integrated Security=True";
+
+        }
+
+        public SqlConnection conectar()
+        {
+            if (con.State == System.Data.ConnectionState.Closed)
+            {
+                con.Open();
+
+            }
+            return con;
+        }
+        public void desconectar()
+        {
+            if (con.State == System.Data.ConnectionState.Open)
+            {
+                con.Close();
+
+            }
+        }
+
+    }
+}
+
+CLASSE CADASTRAR PESSOA
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+using System.Data;
+using System.Data.SqlClient;
+
+namespace Sql
+{
+    public class CadastrarPessoa
+    {
+        DB_Conect conexao = new DB_Conect();
+        SqlCommand cmd = new SqlCommand();
+        public String mensagem = "";
+        List<Pessoa> pessoas = new List<Pessoa>();
+
+        public CadastrarPessoa() { }
+
+        public CadastrarPessoa(
+        string Nome,
+        string Cpf,
+        string Telefone,
+        string Endereco,
+        DateTime dataNascimento,
+        string Naturalidade)
+        {
+            // comando sql
+            cmd.CommandText = "insert into Tabela (Nome, Cpf, Telefone, Endereco, dataNascimento, Naturalidade) values (@Nome, @Cpf, @Telefone, @Endereco, @dataNascimento, @Naturalidade)";
+
+            using (var sql = new SqlConnection())
+            {
+                //parametros
+                cmd.Parameters.AddWithValue("@Nome", Nome);
+                cmd.Parameters.AddWithValue("@Cpf", Cpf);
+                cmd.Parameters.AddWithValue("@Telefone", Telefone);
+                cmd.Parameters.AddWithValue("@Endereco", Endereco);
+                cmd.Parameters.AddWithValue("@dataNascimento", dataNascimento);
+                cmd.Parameters.AddWithValue("@Naturalidade", Naturalidade);
+
+                //conectar com banco
+                try
+                {
+                    //conexao
+                    cmd.Connection = conexao.conectar();
+                    //executar comando
+                    cmd.ExecuteNonQuery();
+                    //desconectar
+                    conexao.desconectar();
+                    //mensagem de erro
+                    this.mensagem = "Cadastrado!";
+                }
+                catch (Exception)
+                {
+                    this.mensagem = "Erro!";
+                }
+            }
+        }
+
+        public void ListarPessoas()
+        {
+            SqlCommand cmd = new SqlCommand();
+            String mensagem = "";
+            string connection = @"Data Source=ITELABD14\SQLEXPRESS;Initial Catalog=BancoC;Integrated Security=True";
+
+            List<Pessoa> pessoas = new List<Pessoa>();
+            try
+            {
+                SqlDataReader resultado;
+                var query = @"SELECT Id, Nome, Cpf, Telefone, Endereco, dataNascimento, Naturalidade FROM Tabela";
+                using (var sql = new SqlConnection(connection))
+                {
+                    SqlCommand command = new SqlCommand(query, sql);
+                    command.Connection.Open();
+                    resultado = command.ExecuteReader();
+
+                    while (resultado.Read())
+                    {
+                        pessoas.Add(new Pessoa(resultado.GetString(resultado.GetOrdinal("Nome")),
+                                               resultado.GetString(resultado.GetOrdinal("Cpf")),
+                                               resultado.GetString(resultado.GetOrdinal("Telefone")),
+                                               resultado.GetString(resultado.GetOrdinal("Endereco")),
+                                               resultado.GetDateTime(resultado.GetOrdinal("dataNascimento")),
+                                               resultado.GetString(resultado.GetOrdinal("Naturalidade"))));
+                    }
+                }
+                Console.WriteLine("========Listagem========");
+                foreach (Pessoa p in pessoas)
+                {
+                    Console.WriteLine("========Inicio========");
+                    Console.WriteLine("Nome: " + p.Nome);
+                    Console.WriteLine("CPF: " + p.Cpf);
+                    Console.WriteLine("Telefone: " + p.Telefone);
+                    Console.WriteLine("Data de Nascimento: " + p.dataNascimento);
+                    Console.WriteLine("Naturalidade: " + p.Naturalidade);
+                    Console.WriteLine("========Fim========");
+                }
+            }
+            catch (Exception)
+            {
+                mensagem = "Erro!";
+            }
+        }
+
+        public void UpdatePessoas(
+        string Nome,
+        string Cpf,
+        string Telefone,
+        string Endereco,
+        DateTime dataNascimento,
+        string Naturalidade)
+        {
+            // comando sql
+            cmd.CommandText = @"update Tabela set Nome = @Nome, Cpf = @Cpf, Telefone = @Telefone, Endereco = @Endereco, dataNascimento = @dataNascimento, Naturalidade = @Naturalidade Where Id = 1";
+            cmd = new SqlCommand(@"Where Id = 1 delete from Tabela where id = 1");
+            using (var sql = new SqlConnection())
+            {
+                ////parametros
+                cmd.Parameters.AddWithValue("@Nome", Nome);
+                cmd.Parameters.AddWithValue("@Cpf", Cpf);
+                cmd.Parameters.AddWithValue("@Telefone", Telefone);
+                cmd.Parameters.AddWithValue("@Endereco", Endereco);
+                cmd.Parameters.AddWithValue("@dataNascimento", dataNascimento);
+                cmd.Parameters.AddWithValue("@Naturalidade", Naturalidade);
+
+                //conectar com banco
+                try
+                {
+                    //conexao
+                    cmd.Connection = conexao.conectar();
+                    //executar comando
+                    cmd.ExecuteNonQuery();
+                    //desconectar
+                    conexao.desconectar();
+                    //mensagem de erro
+                    this.mensagem = "Cadastrado!";
+                }
+                catch (Exception)
+                {
+                    this.mensagem = "Erro!";
+                }
+            }
+        }
+        public void DeletePessoas()
+        {
+            SqlCommand cmd = new SqlCommand();
+            String mensagem = "";
+            string connection = @"Data Source=ITELABD14\SQLEXPRESS;Initial Catalog=BancoC;Integrated Security=True";
+
+            List<Pessoa> pessoas = new List<Pessoa>();
+            try
+            {
+                SqlDataReader resultado;
+                var query = @"Where Id = 1 delete from Tabela where id = 1";
+                using (var sql = new SqlConnection(connection))
+                {
+                    SqlCommand command = new SqlCommand(query, sql);
+                    command.Connection.Open();
+                    resultado = command.ExecuteReader();
+
+                    while (resultado.Read())
+                    {
+                        pessoas.Add(new Pessoa(resultado.GetString(resultado.GetOrdinal("Nome")),
+                                               resultado.GetString(resultado.GetOrdinal("Cpf")),
+                                               resultado.GetString(resultado.GetOrdinal("Telefone")),
+                                               resultado.GetString(resultado.GetOrdinal("Endereco")),
+                                               resultado.GetDateTime(resultado.GetOrdinal("dataNascimento")),
+                                               resultado.GetString(resultado.GetOrdinal("Naturalidade"))));
+                    }
+                }
+                Console.WriteLine("========Listagem========");
+                foreach (Pessoa p in pessoas)
+                {
+                    Console.WriteLine("========Inicio========");
+                    Console.WriteLine("Nome: " + p.Nome);
+                    Console.WriteLine("CPF: " + p.Cpf);
+                    Console.WriteLine("Telefone: " + p.Telefone);
+                    Console.WriteLine("Data de Nascimento: " + p.dataNascimento);
+                    Console.WriteLine("Naturalidade: " + p.Naturalidade);
+                    Console.WriteLine("========Fim========");
+                }
+            }
+            catch (Exception)
+            {
+                mensagem = "Erro!";
+            }
+        }
+
+
+    }
+}
+
+
+
