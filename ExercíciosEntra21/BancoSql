@@ -1,0 +1,159 @@
+create table Pessoa
+(
+	Id int identity (1,1) not null,
+	Nome varchar(255) not null,
+	Cpf varchar(255) not null,
+	Rg varchar(255) not null,
+	DataNascimento date,
+	Naturalidade varchar(50),
+	constraint Pk_Pessoa primary key (Id),
+);
+
+create table Telefone
+(
+	Id int identity (1,1) not null,
+	DDD varchar(255) not null,
+	Telefone varchar(255) not null,
+	constraint Pk_Telefone primary key (Id),
+);
+
+create table TelefonePessoa
+(
+	IdPessoa int not null,
+	IdTelefone int not null,
+	constraint Fk_Pessoa foreign key (IdPessoa) references Pessoa(Id),
+	constraint Fk_Telefone foreign key (IdTelefone) references Telefone(Id)
+);
+
+
+insert into TelefonePessoa(IdPessoa, IdTelefone) values ()
+select * from Pessoa p inner join TelefonePessoa tp on p.id = tp.IdPessoa inner join Telefone t on tp.IdTelefone = t.Id
+
+--Mostrar as pessoas em que o id tem ""
+select p.Id,  from pessoa p inner join TelefonePessoa tp on p.Id = tp.IdTelefone inner join pessoa p on tp.IdTelefone = p.Id where p.Id = '' 
+
+
+SELECT * FROM Pessoa;
+SELECT * FROM Telefone;
+SELECT * FROM TelefonePessoa;
+
+create table Local
+(
+	Id int identity (1,1) not null,
+	Descricao varchar(255) not null,
+	Latitude float not null,
+	Longitude float not null,
+	constraint Pk_Local primary key (Id),
+);
+
+create table Clima
+(
+	Id int identity (1,1) not null,
+	Descricao_Curta varchar(255) not null,
+	Descricao_Longa varchar(255) not null,
+	TemperaturaMinima int not null,
+	TemperaturaMax int not null,
+	Umidade float not null,
+	Data_Clima date,
+	Direcao_Vento varchar(50),
+	constraint Pk_Clima primary key (Id),
+);
+
+create table ClimaTempo
+(
+	IdLocal int not null,
+	IdClima int not null,
+	Data_Clima_Tempo Date not null Default getdate(),
+	constraint Fk_Local foreign key (Idlocal) references Local(Id),
+	constraint Fk_Clima foreign key (IdClima) references Clima(Id)
+);
+
+insert into Local (Descricao, Latitude, Longitude) values ('Balneário Camboriú',100,200)
+insert into Local (Descricao, Latitude, Longitude) values ('Itajaí',200,200)
+insert into Local (Descricao, Latitude, Longitude) values ('Brusque',100,500)
+insert into Local (Descricao, Latitude, Longitude) values ('Criciúma',300,300)
+insert into Local (Descricao, Latitude, Longitude) values ('Blumenau',400,900)
+
+insert into Clima(Descricao_Curta,Descricao_Longa,TemperaturaMinima,TemperaturaMax,Umidade,Data_Clima,Direcao_Vento) values ('tropical','Calor','5','20',50,getdate(),'Norte')
+insert into Clima(Descricao_Curta,Descricao_Longa,TemperaturaMinima,TemperaturaMax,Umidade,Data_Clima,Direcao_Vento) values ('Equatorial','Frio','10','30',100,getdate(),'Sul')
+insert into Clima(Descricao_Curta,Descricao_Longa,TemperaturaMinima,TemperaturaMax,Umidade,Data_Clima,Direcao_Vento) values ('mediterrâneo','Seco','5','15',30,getdate(),'Leste')
+insert into Clima(Descricao_Curta,Descricao_Longa,TemperaturaMinima,TemperaturaMax,Umidade,Data_Clima,Direcao_Vento) values ('subtropical','Úmido','8','23',10,getdate(),'Oeste')
+insert into Clima(Descricao_Curta,Descricao_Longa,TemperaturaMinima,TemperaturaMax,Umidade,Data_Clima,Direcao_Vento) values ('semi-árido','Frio de montanha','20','40',40,getdate(),'Norte')
+
+insert into ClimaTempo (IdLocal, IdClima, Data_Clima_Tempo) values (1,1,getdate())
+insert into ClimaTempo (IdLocal, IdClima, Data_Clima_Tempo) values (1,2,getdate())
+insert into ClimaTempo (IdLocal, IdClima, Data_Clima_Tempo) values (2,2,getdate())
+insert into ClimaTempo (IdLocal, IdClima, Data_Clima_Tempo) values (2,3,getdate())
+insert into ClimaTempo (IdLocal, IdClima, Data_Clima_Tempo) values (3,3,getdate())
+insert into ClimaTempo (IdLocal, IdClima, Data_Clima_Tempo) values (3,4,getdate())
+insert into ClimaTempo (IdLocal, IdClima, Data_Clima_Tempo) values (4,4,getdate())
+insert into ClimaTempo (IdLocal, IdClima, Data_Clima_Tempo) values (4,5,getdate())
+insert into ClimaTempo (IdLocal, IdClima, Data_Clima_Tempo) values (5,5,getdate())
+insert into ClimaTempo (IdLocal, IdClima, Data_Clima_Tempo) values (5,1,getdate())
+
+
+select * from Clima
+select * from Local
+select * from ClimaTempo
+
+--Consulta todos "*" e inclui "inner join" o ClimaTempo onde o id do Local vai ser igual ao IdLocal que esta no ClimaTempo e inclui "inner join"  Clima onde o IdClima vai ser igual ao id do clima
+select * from Local l inner join ClimaTempo ct on l.id = ct.IdLocal inner join Clima c on ct.IdClima = c.Id
+
+select l.Descricao, c.Descricao_Curta from Local l inner join ClimaTempo ct on l.id = ct.IdLocal inner join Clima c on ct.IdClima = c.Id
+
+
+--Remove os espaçoes vazios da tabela que foi consultada
+--No caso, literalmente ele vai executar a primeira linha, "EXCETO" a primeira linha com espaços nulos ' '
+select l.Descricao, c.Descricao_Curta from Local l inner join ClimaTempo ct on l.id = ct.IdLocal inner join Clima c on ct.IdClima = c.Id
+except
+select l.Descricao, c.Descricao_Curta from Local l inner join ClimaTempo ct on l.id = ct.IdLocal inner join Clima c on ct.IdClima = c.Id where c.Descricao_Curta = ''
+
+--Mostrar os climas em que a descrição tem "tropical" e "subtropical"
+select l.Descricao, c.Descricao_Curta from Local l inner join ClimaTempo ct on l.id = ct.IdLocal inner join Clima c on ct.IdClima = c.Id where c.Descricao_Curta = 'tropical' 
+union -- mesma coisa que "or" ou "OU"
+select l.Descricao, c.Descricao_Curta from Local l inner join ClimaTempo ct on l.id = ct.IdLocal inner join Clima c on ct.IdClima = c.Id where c.Descricao_Curta = 'subtropical' 
+
+--Localizando registros usando uma parte da palavra usando "like %nu%" ou seja, procure algo que se pareça "like" comece com "nu" 
+select l.Descricao, c.Descricao_Curta from Local l inner join ClimaTempo ct on l.id = ct.IdLocal inner join Clima c on ct.IdClima = c.Id where c.Descricao_Curta like '%nu'
+
+
+
+select * from Clima c inner join ClimaTempo ct on c.Id = ct.IdClima where c.Descricao_Curta = 'tropical'
+
+-- "left join" pega a intersecção entre as duas tabelas + a tabela da esquerda
+select * from Clima c left join ClimaTempo ct on c.Id = ct.IdClima where c.Descricao_Curta = 'tropical' 
+
+
+
+create or alter procedure Proc_Remover_Cidade @descricao varchar(255)
+as
+begin
+	declare
+	@idLocal int;
+	select @idLocal = l.Id from Local l
+	where l.Descricao = @descricao
+	if @idLocal > 0
+		begin
+			delete from ClimaTempo where IdLocal = @idLocal;
+			delete from Local where Id = @idLocal;
+			print 'Registro removido',
+	    end;
+	else
+		begin
+
+
+
+-- Programação apagar uma descrição
+begin
+  declare
+	 @texto varchar(100);
+	 begin
+		select @texto = c.Descricao_curta from Clima;
+		select @texto;
+  end;
+end;
+-- Programação apagar uma descrição
+
+
+
+
